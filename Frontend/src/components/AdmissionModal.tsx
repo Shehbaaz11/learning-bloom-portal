@@ -11,6 +11,7 @@ interface AdmissionModalProps {
 const AdmissionModal = ({ open, onClose }: AdmissionModalProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [applicationNumber, setApplicationNumber] = useState('');
 
   const [formData, setFormData] = useState({
     studentName: '',
@@ -40,9 +41,11 @@ const AdmissionModal = ({ open, onClose }: AdmissionModalProps) => {
       const data = await response.json();
 
       if (data.success) {
+        setApplicationNumber(data.applicationNumber);
         setSubmitted(true);
         setTimeout(() => {
           setSubmitted(false);
+          setApplicationNumber('');
           setFormData({
             studentName: '',
             studentPhone: '',
@@ -55,7 +58,7 @@ const AdmissionModal = ({ open, onClose }: AdmissionModalProps) => {
             address: ''
           });
           onClose();
-        }, 2000);
+        }, 4000);
       } else {
         alert('Error: ' + data.message);
       }
@@ -98,6 +101,11 @@ const AdmissionModal = ({ open, onClose }: AdmissionModalProps) => {
                 </div>
                 <p className="font-serif text-lg font-bold text-primary">Application Submitted!</p>
                 <p className="text-muted-foreground text-sm mt-2">We will contact you shortly.</p>
+                <div className="mt-4 p-4 bg-secondary rounded-2xl border border-border">
+                  <p className="text-xs text-muted-foreground">Your Application Number</p>
+                  <p className="font-bold text-primary text-2xl mt-1 tracking-wider">{applicationNumber}</p>
+                  <p className="text-xs text-muted-foreground mt-2">📌 Save this number for future reference</p>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
