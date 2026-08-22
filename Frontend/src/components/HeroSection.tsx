@@ -33,7 +33,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-white/80 font-sans text-lg sm:text-xl max-w-2xl mx-auto mb-10"
         >
-          Empowering Minds, Shaping Futures since 2021.
+          Empowering Minds, Shaping Futures Anjuman Schoolll since 2021.
         </motion.p>
       </div>
 
