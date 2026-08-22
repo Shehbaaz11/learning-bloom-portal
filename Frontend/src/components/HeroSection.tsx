@@ -25,7 +25,7 @@ const HeroSection = () => {
           className="font-serif font-bold text-white leading-[1.05] mb-6"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
         >
-          Welcome to Learning High School
+          Welcome to ANjuman english high school
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-white/80 font-sans text-lg sm:text-xl max-w-2xl mx-auto mb-10"
         >
-          Empowering Minds, Shaping Futures Anjuman Schoolll since 2021.
+          Empowering Minds, Shaping Futures since 2021.
         </motion.p>
       </div>
 
