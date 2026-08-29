@@ -25,3 +25,6 @@ jobs:
           file: ./Frontend/Dockerfile
           push: false
           tags: pr-preview:${{ github.event.pull_request.number }}
+
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
