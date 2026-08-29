@@ -35,7 +35,6 @@ jobs:
           context: ./Frontend
           file: ./Frontend/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/pr-preview:${{ github.event.pull_request.number }}
-
+          tags: ghcr.io/shehbaaz11/pr-preview:${{ github.event.pull_request.number }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
