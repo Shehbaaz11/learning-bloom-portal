@@ -25,7 +25,7 @@ const HeroSection = () => {
           className="font-serif font-bold text-white leading-[1.05] mb-6"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
         >
-         Welcome to day 3 school test-33333 bigboss
+         Welcome to day 3 school test-33333 bigboss john cena
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
