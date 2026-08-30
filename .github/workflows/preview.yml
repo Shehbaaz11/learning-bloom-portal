@@ -38,3 +38,14 @@ jobs:
           tags: ghcr.io/shehbaaz11/pr-preview:${{ github.event.pull_request.head.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Notify backend that image is ready
+        run: |
+          curl -X POST "${{ secrets.PREVIEW_BACKEND_URL }}/api/github/image-ready" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "prNumber": "${{ github.event.pull_request.number }}",
+              "repository": "${{ github.repository }}",
+              "branch": "${{ github.event.pull_request.head.ref }}",
+              "commitSha": "${{ github.event.pull_request.head.sha }}"
+            }'
