@@ -29,7 +29,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push Docker image
+      # ==========================================
+      # 1. BUILD FRONTEND IMAGE
+      # ==========================================
+
+      - name: Build and Push Frontend Docker image
         uses: docker/build-push-action@v6
         with:
           context: ./Frontend
@@ -39,7 +43,25 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Notify backend that image is ready
+      # ==========================================
+      # 2. BUILD BACKEND IMAGE
+      # ==========================================
+
+      - name: Build and Push Backend Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Backend
+          file: ./Backend/Dockerfile
+          push: true
+          tags: ghcr.io/shehbaaz11/pr-preview-backend:${{ github.event.pull_request.head.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # ==========================================
+      # 3. NOTIFY BACKEND
+      # ==========================================
+
+      - name: Notify backend that images are ready
         run: |
           curl -X POST "${{ secrets.PREVIEW_BACKEND_URL }}/api/github/image-ready" \
             -H "Content-Type: application/json" \
