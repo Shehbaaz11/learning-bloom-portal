@@ -37,7 +37,7 @@ const today = new Date().toISOString().split('T')[0];
     setErrors({});
 
     try {
-      const response = await fetch('http://localhost:5000/api/admission', {
+      const response = await fetch('/api/admission', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
