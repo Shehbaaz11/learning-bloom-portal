@@ -25,7 +25,7 @@ const HeroSection = () => {
           className="font-serif font-bold text-white leading-[1.05] mb-6"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
         >
-       PR Preview Test - Frontend Updated
+       Learning High School-1
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
