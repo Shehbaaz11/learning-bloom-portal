@@ -16,7 +16,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="text-gold font-sans font-medium tracking-[0.25em] uppercase text-sm mb-6"
         >
-          Shehbaaz present's
+          Shehbaaz present's 
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
@@ -25,7 +25,7 @@ const HeroSection = () => {
           className="font-serif font-bold text-white leading-[1.05] mb-6"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
         >
-        Madina - mecca 
+         Arsha 6 years Anniversary  
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
