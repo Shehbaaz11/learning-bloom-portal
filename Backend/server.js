@@ -20,6 +20,13 @@ app.get('/', (req, res) => {
   res.json({ message: '✅ Learning High School Backend Running!' });
 });
 
+app.get("/health", (req, res) => {
+  res.json({
+    message: "Backend Preview Updated",
+    status: "ok"
+  });
+});
+
 app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });
 });

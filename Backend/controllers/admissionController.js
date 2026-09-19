@@ -6,59 +6,62 @@ const submitAdmission = async (req, res) => {
   console.log("📥 Incoming Admission Request...");
 
   // 1. Zod Validation
-  const validation = admissionZodSchema.safeParse(req.body);
+  // const validation = admissionZodSchema.safeParse(req.body);
 
-  if (!validation.success) {
-    const formattedErrors = validation.error.errors.map((err) => ({
-      field: err.path[0],
-      message: err.message,
-    }));
+  // if (!validation.success) {
+  //   const formattedErrors = validation.error.errors.map((err) => ({
+  //     field: err.path[0],
+  //     message: err.message,
+  //   }));
 
-    return res.status(400).json({
-      success: false,
-      message: "Validation Failed",
-      errors: formattedErrors,
-    });
-  }
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: "Validation Failed",
+  //     errors: formattedErrors,
+  //   });
+  // }
 
-  const data = validation.data;
+  // const data = validation.data;
+  
+  const data = req.body;
+
   const client = await pool.connect();
 
   try {
     await client.query("BEGIN"); // Start Transaction
 
     // 2. Duplication Check
-    const duplicateCheck = await client.query(
-      `SELECT id, student_name FROM admission_forms 
-           WHERE student_phone = $1 OR (student_name = $2 AND student_phone = $1)`,
-      [data.studentPhone, data.studentName]
-    );
+    // const duplicateCheck = await client.query(
+    //   `SELECT id, student_name FROM admission_forms 
+    //        WHERE student_phone = $1 OR (student_name = $2 AND student_phone = $1)`,
+    //   [data.studentPhone, data.studentName]
+    // );
 
-    if (duplicateCheck.rows.length > 0) {
-      await client.query("ROLLBACK");
-      const existing = duplicateCheck.rows[0];
-      const message =
-        existing.student_name !== data.studentName
-          ? "This phone number is already registered with another student."
-          : "Duplicate Entry: A student with this name and phone number is already registered.";
-      return res.status(409).json({ success: false, message });
-    }
+    // if (duplicateCheck.rows.length > 0) {
+    //   await client.query("ROLLBACK");
+    //   const existing = duplicateCheck.rows[0];
+    //   const message =
+    //     existing.student_name !== data.studentName
+    //       ? "This phone number is already registered with another student."
+    //       : "Duplicate Entry: A student with this name and phone number is already registered.";
+    //   return res.status(409).json({ success: false, message });
+    // }
 
     // 3. Student & Parent Phone Same Check
     // 3. Student & Parent Phone Same Check
-    if (data.studentPhone === data.parentPhone) {
-      await client.query("ROLLBACK");
-      return res.status(400).json({
-        success: false,
-        message: "Validation Failed", // Common message
-        errors: [
-          {
-            field: "parentPhone", // Ab frontend ko pata chalega ki kahan dikhana hai
-            message: "Student and parent contact numbers cannot be the same.",
-          },
-        ],
-      });
-    }
+    // if (data.studentPhone === data.parentPhone) {
+    //   await client.query("ROLLBACK");
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Validation Failed", // Common message
+    //     errors: [
+    //       {
+    //         field: "parentPhone", // Ab frontend ko pata chalega ki kahan dikhana hai
+    //         message: "Student and parent contact numbers cannot be the same.",
+    //       },
+    //     ],
+    //   });
+    // }
 
     // 3. Insert Base Data
     const insertQuery = `
